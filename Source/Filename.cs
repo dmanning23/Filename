@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
 
-namespace Filename
+namespace FilenameBuddy
 {
 	/// <summary>
 	/// This is a class for manipulating filenames
 	/// </summary>
-	public class FilenameBuddy
+	public class Filename
 	{
 		#region Members
 
@@ -27,7 +27,7 @@ namespace Filename
 		/// <summary>
 		/// get or set the filename member variable
 		/// </summary>
-		public string Filename
+		public string File
 		{
 			get { return m_strFilename; }
 			set { m_strFilename = value; }
@@ -37,7 +37,7 @@ namespace Filename
 
 		#region Methods
 
-		static FilenameBuddy()
+		static Filename()
 		{
 #if WINDOWS
 			//Get the current working directory
@@ -51,7 +51,7 @@ namespace Filename
 		/// <summary>
 		/// construct a blank filename
 		/// </summary>
-		public FilenameBuddy()
+		public Filename()
 		{
 		}
 
@@ -84,7 +84,7 @@ namespace Filename
 		/// construct a filename from a string that is an absolute filename
 		/// </summary>
 		/// <param name="strFileName">the string to use as an absolute filename</param>
-		public FilenameBuddy(string strFilename)
+		public Filename(string strFilename)
 		{
 			m_strFilename = strFilename;
 		}
