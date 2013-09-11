@@ -5,17 +5,17 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2A84DFE8-75E0-4774-BAAF-00629ED44405}</ProjectGuid>
+    <ProjectGuid>{083CFFCD-4832-4783-B7B9-CD25E7F64B2C}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Filename.Windows</RootNamespace>
-    <AssemblyName>Filename.Windows</AssemblyName>
+    <RootNamespace>Filename.Tests</RootNamespace>
+    <AssemblyName>Filename.Tests</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;WINDOWS</DefineConstants>
+    <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -30,12 +30,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\Source\Filename.cs">
-      <Link>Filename.cs</Link>
-    </Compile>
+    <Compile Include="Test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Windows\Filename.Windows.csproj">
+      <Project>{2A84DFE8-75E0-4774-BAAF-00629ED44405}</Project>
+      <Name>Filename.Windows</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

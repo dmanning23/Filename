@@ -5,15 +5,11 @@ namespace FilenameBuddy
 {
 	/// <summary>
 	/// This is a class for manipulating filenames
+	/// This is used for MonoGame, where all resource files are put in a folder called "Content"
 	/// </summary>
 	public class Filename
 	{
 		#region Members
-
-		/// <summary>
-		/// The location of the program, used to get relative paths
-		/// </summary>
-		private static string g_ProgramLocation;
 
 		/// <summary>
 		/// The full path and filename
@@ -23,6 +19,11 @@ namespace FilenameBuddy
 		#endregion
 
 		#region Properties
+
+		/// <summary>
+		/// The location of the program, used to get relative paths
+		/// </summary>
+		public static string ProgramLocation { get; private set; }
 
 		/// <summary>
 		/// get or set the filename member variable
@@ -41,10 +42,10 @@ namespace FilenameBuddy
 		{
 #if WINDOWS
 			//Get the current working directory
-			g_ProgramLocation = Directory.GetCurrentDirectory() + @"\";
+			ProgramLocation = Directory.GetCurrentDirectory() + @"\";
 #else
 			//xbox doesnt support current working directory
-			g_ProgramLocation = "";
+			ProgramLocation = "";
 #endif
 		}
 
@@ -57,7 +58,7 @@ namespace FilenameBuddy
 
 		/// <summary>
 		/// Set the current directory of the application.  
-		/// This will set the program location to the folder right before "Resources"
+		/// This will set the program location to the folder right before "Content"
 		/// </summary>
 		/// <param name="strCurrentDirectory">The current directory of the application.</param>
 		static public void SetCurrentDirectory(string strCurrentDirectory)
@@ -66,16 +67,16 @@ namespace FilenameBuddy
 			string[] pathinfo = strCurrentDirectory.Split(new Char[] { '/', '\\' });
 
 			//find the content folder
-			g_ProgramLocation = "";
+			ProgramLocation = "";
 			for (int i = 0; i < pathinfo.Length; i++)
 			{
-				if (pathinfo[i].ToLower() == "resources")
+				if (pathinfo[i].ToLower() == "Content")
 				{
 					break;
 				}
 				else
 				{
-					g_ProgramLocation += pathinfo[i] + @"\";
+					ProgramLocation += pathinfo[i] + @"\";
 				}
 			}
 		}
@@ -96,7 +97,7 @@ namespace FilenameBuddy
 		public void SetRelFilename(string strRelFilename)
 		{
 			//take the program location and append the filename to the end
-			m_strFilename = g_ProgramLocation + strRelFilename;
+			m_strFilename = ProgramLocation + strRelFilename;
 		}
 
 		/// <summary>
@@ -123,9 +124,9 @@ namespace FilenameBuddy
 		}
 
 		/// <summary>
-		/// Get teh relative path, which is everything after "Resources"
+		/// Get teh relative path, which is everything after "Content"
 		/// </summary>
-		/// <returns>the path to the file, starting at and including the "resources" directory</returns>
+		/// <returns>the path to the file, starting at and including the "Content" directory</returns>
 		public string GetRelPath()
 		{
 			if (!String.IsNullOrEmpty(m_strFilename))
@@ -137,7 +138,7 @@ namespace FilenameBuddy
 				int iContentFolderIndex = 0;
 				while (iContentFolderIndex < pathinfo.Length)
 				{
-					if (pathinfo[iContentFolderIndex].ToLower() == "resources")
+					if (pathinfo[iContentFolderIndex].ToLower() == "Content")
 					{
 						break;
 					}
