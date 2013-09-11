@@ -58,6 +58,14 @@ namespace FilenameBuddyTests
 		}
 
 		[Test()]
+		public void SetRelFilename1()
+		{
+			Filename dude = new Filename();
+			dude.SetRelFilename(@"Content\Buttnuts\test.txt");
+			Assert.AreEqual(progLocation() + @"Content\Buttnuts\test.txt", dude.File);
+		}
+
+		[Test()]
 		public void GetPath()
 		{
 			Filename dude = new Filename();
@@ -79,6 +87,14 @@ namespace FilenameBuddyTests
 			Filename dude = new Filename();
 			dude.SetRelFilename("test.txt");
 			Assert.AreEqual(progLocation(), dude.GetPath());
+		}
+
+		[Test()]
+		public void GetRelPath()
+		{
+			Filename dude = new Filename();
+			dude.SetRelFilename(@"Content\Buttnuts\test.txt");
+			Assert.AreEqual(@"Buttnuts\", dude.GetRelPath());
 		}
 	}
 }

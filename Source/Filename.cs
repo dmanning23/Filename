@@ -70,13 +70,12 @@ namespace FilenameBuddy
 			ProgramLocation = "";
 			for (int i = 0; i < pathinfo.Length; i++)
 			{
-				if (pathinfo[i].ToLower() == "Content")
+				ProgramLocation += pathinfo[i] + @"\";
+
+				//stop after we hit the content folder
+				if (pathinfo[i] == "Content")
 				{
 					break;
-				}
-				else
-				{
-					ProgramLocation += pathinfo[i] + @"\";
 				}
 			}
 		}
@@ -135,17 +134,16 @@ namespace FilenameBuddy
 				string[] pathinfo = GetPath().Split(new Char[] { '/', '\\' });
 
 				//find the content folder
-				int iContentFolderIndex = 0;
+				int iContentFolderIndex = 1;
 				while (iContentFolderIndex < pathinfo.Length)
 				{
-					if (pathinfo[iContentFolderIndex].ToLower() == "Content")
+					//skip over the content folder itself
+					if (pathinfo[iContentFolderIndex - 1] == "Content")
 					{
 						break;
 					}
-					else
-					{
-						iContentFolderIndex++;
-					}
+
+					iContentFolderIndex++;
 				}
 
 				//put the path back together
