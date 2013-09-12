@@ -96,6 +96,122 @@ namespace FilenameBuddyTests
 			dude.SetRelFilename(@"Content\Buttnuts\test.txt");
 			Assert.AreEqual(@"Buttnuts\", dude.GetRelPath());
 		}
+
+		[Test()]
+		public void GetRelPath1()
+		{
+			Filename dude = new Filename();
+			dude.SetRelFilename(@"Content\Buttnuts\assnuts\test.txt");
+			Assert.AreEqual(@"Buttnuts\assnuts\", dude.GetRelPath());
+		}
+
+		[Test()]
+		public void GetRelPath2()
+		{
+			Filename dude = new Filename();
+			dude.SetRelFilename(@"Buttnuts\assnuts\test.txt");
+			//NOTICE HOW IT BREAKS IF THERE IS NO CONTENT DIRECTORY!!!
+			Assert.AreEqual(@"", dude.GetRelPath());
+		}
+
+		[Test()]
+		public void GetFilename()
+		{
+			Filename dude = new Filename();
+			dude.SetRelFilename(@"Content\Buttnuts\assnuts\test.txt");
+			Assert.AreEqual(@"test.txt", dude.GetFile());
+		}
+
+		[Test()]
+		public void GetFilename1()
+		{
+			Filename dude = new Filename();
+			dude.SetRelFilename(@"Content\Buttnuts\assnuts\test");
+			Assert.AreEqual(@"test", dude.GetFile());
+		}
+
+		[Test()]
+		public void GetFileExt()
+		{
+			Filename dude = new Filename();
+			dude.SetRelFilename(@"Content\Buttnuts\assnuts\test.txt");
+			Assert.AreEqual(@"txt", dude.GetFileExt());
+		}
+
+		[Test()]
+		public void GetFileExt1()
+		{
+			Filename dude = new Filename();
+			dude.SetRelFilename(@"Content\Buttnuts\assnuts\test");
+			Assert.AreEqual(@"", dude.GetFileExt());
+		}
+
+		[Test()]
+		public void GetFileNoExt()
+		{
+			Filename dude = new Filename();
+			dude.SetRelFilename(@"Content\Buttnuts\assnuts\test.txt");
+			Assert.AreEqual(@"test", dude.GetFileNoExt());
+		}
+
+		[Test()]
+		public void GetFileNoExtBreakIt()
+		{
+			//NOTICE HOW THE FILE WITHOUT EXTENSION DOESNT WORK!!!
+			Filename dude = new Filename();
+			dude.SetRelFilename(@"Content\Buttnuts\assnuts\test");
+			Assert.AreNotEqual(@"test", dude.GetFileNoExt());
+		}
+
+		[Test()]
+		public void GetPathFileNoExt()
+		{
+			Filename dude = new Filename();
+			string testFile = @"Content\Buttnuts\assnuts\test.txt";
+			dude.SetRelFilename(testFile);
+
+			Assert.AreEqual(progLocation() +  @"Content\Buttnuts\assnuts\test", dude.GetPathFileNoExt());
+		}
+
+		[Test()]
+		public void GetRelPathFileNoExt()
+		{
+			Filename dude = new Filename();
+			string testFile = @"Content\Buttnuts\assnuts\test.txt";
+			dude.SetRelFilename(testFile);
+
+			Assert.AreEqual(@"Buttnuts\assnuts\test", dude.GetRelPathFileNoExt());
+		}
+
+		[Test()]
+		public void GetRelFilename()
+		{
+			Filename dude = new Filename();
+			string testFile = @"Content\Buttnuts\assnuts\test.txt";
+			dude.SetRelFilename(testFile);
+
+			Assert.AreEqual(@"Buttnuts\assnuts\test.txt", dude.GetRelFilename());
+		}
+
+		[Test()]
+		public void GetRelFilename1()
+		{
+			Filename dude = new Filename();
+			string testFile = @"Content\test.txt";
+			dude.SetRelFilename(testFile);
+
+			Assert.AreEqual(@"test.txt", dude.GetRelFilename());
+		}
+
+		[Test()]
+		public void GetRelFilename2()
+		{
+			Filename dude = new Filename();
+			string testFile = @"test.txt";
+			dude.SetRelFilename(testFile);
+
+			Assert.AreEqual(@"test.txt", dude.GetRelFilename());
+		}
 	}
 }
 

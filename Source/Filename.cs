@@ -125,7 +125,7 @@ namespace FilenameBuddy
 		/// <summary>
 		/// Get teh relative path, which is everything after "Content"
 		/// </summary>
-		/// <returns>the path to the file, starting at and including the "Content" directory</returns>
+		/// <returns>the path to the file, starting at but excluding the "Content" directory</returns>
 		public string GetRelPath()
 		{
 			if (!String.IsNullOrEmpty(m_strFilename))
@@ -208,6 +208,7 @@ namespace FilenameBuddy
 
 		/// <summary>
 		/// Get only the filename, no path or extension
+		/// NOTE: this will not work correctly if the file doesnt have an extension!!!
 		/// </summary>
 		/// <returns>the filename with no path info or extension</returns>
 		public string GetFileNoExt()
