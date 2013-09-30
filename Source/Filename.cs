@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace FilenameBuddy
 {
@@ -67,10 +68,10 @@ namespace FilenameBuddy
 			string[] pathinfo = strCurrentDirectory.Split(new Char[] { '/', '\\' });
 
 			//find the content folder
-			ProgramLocation = "";
+			StringBuilder progBuilder = new StringBuilder();
 			for (int i = 0; i < pathinfo.Length; i++)
 			{
-				ProgramLocation += pathinfo[i] + @"\";
+				progBuilder.AppendFormat(@"{0}\", pathinfo[i]);
 
 				//stop after we hit the content folder
 				if (pathinfo[i] == "Content")
@@ -78,6 +79,8 @@ namespace FilenameBuddy
 					break;
 				}
 			}
+
+			ProgramLocation = progBuilder.ToString();
 		}
 
 		/// <summary>
@@ -96,16 +99,20 @@ namespace FilenameBuddy
 		public void SetRelFilename(string strRelFilename)
 		{
 			//take the program location and append the filename to the end
-			m_strFilename = ProgramLocation + strRelFilename;
+			StringBuilder fileBuilder = new StringBuilder();
+			fileBuilder.Append(ProgramLocation);
+			fileBuilder.Append(@"Content\");
+			fileBuilder.Append(strRelFilename);
+			m_strFilename = fileBuilder.ToString();
 		}
 
 		/// <summary>
 		/// Get the path from a filename
 		/// </summary>
-		/// <returns>The path to a file with a '\' at the end</returns>
+		/// <returns>The path to a file with a ' at the end</returns>
 		public string GetPath()
 		{
-			string strTotalPath = "";
+			StringBuilder strTotalPath = new StringBuilder();
 
 			if (!String.IsNullOrEmpty(m_strFilename))
 			{
@@ -115,11 +122,11 @@ namespace FilenameBuddy
 				//put the path back together
 				for (int i = 0; i < pathinfo.Length - 1; i++)
 				{
-					strTotalPath += pathinfo[i] + @"\";
+					strTotalPath.AppendFormat(@"{0}\", pathinfo[i]);
 				}
 			}
 
-			return strTotalPath;
+			return strTotalPath.ToString();
 		}
 
 		/// <summary>
@@ -128,42 +135,40 @@ namespace FilenameBuddy
 		/// <returns>the path to the file, starting at but excluding the "Content" directory</returns>
 		public string GetRelPath()
 		{
-			if (!String.IsNullOrEmpty(m_strFilename))
+			if (String.IsNullOrEmpty(m_strFilename))
 			{
-				//tokenize teh string
-				string[] pathinfo = GetPath().Split(new Char[] { '/', '\\' });
+					return "";
+			}
 
-				//find the content folder
-				int iContentFolderIndex = 1;
-				while (iContentFolderIndex < pathinfo.Length)
+			//tokenize teh string
+			string[] pathinfo = GetPath().Split(new Char[] { '/', '\\' });
+
+			//find the content folder
+			int iContentFolderIndex = 1;
+			while (iContentFolderIndex < pathinfo.Length)
+			{
+				//skip over the content folder itself
+				if (pathinfo[iContentFolderIndex - 1] == "Content")
 				{
-					//skip over the content folder itself
-					if (pathinfo[iContentFolderIndex - 1] == "Content")
-					{
-						break;
-					}
-
-					iContentFolderIndex++;
+					break;
 				}
 
-				//put the path back together
-				string strRelativePath = "";
-				while (iContentFolderIndex < pathinfo.Length)
-				{
-					if (0 != pathinfo[iContentFolderIndex].Length)
-					{
-						strRelativePath += pathinfo[iContentFolderIndex] + @"\";
-					}
-					iContentFolderIndex++;
-				}
+				iContentFolderIndex++;
+			}
 
-				//return that whole thing we constructed
-				return strRelativePath;
-			}
-			else
+			//put the path back together
+			string strRelativePath = "";
+			while (iContentFolderIndex < pathinfo.Length)
 			{
-				return "";
+				if (0 != pathinfo[iContentFolderIndex].Length)
+				{
+					strRelativePath += pathinfo[iContentFolderIndex] + @"\";
+				}
+				iContentFolderIndex++;
 			}
+
+			//return that whole thing we constructed
+			return strRelativePath;
 		}
 
 		/// <summary>
