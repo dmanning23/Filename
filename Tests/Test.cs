@@ -50,6 +50,15 @@ namespace FilenameBuddyTests
 		}
 
 		[Test()]
+		public void SetAbsFilenameGetRelFilename()
+		{
+			//set the name and get it back
+			Filename dude = new Filename();
+			dude.File = progLocation() + @"Buttnuts\test.txt";
+			Assert.AreEqual(@"Buttnuts\test.txt", dude.GetRelFilename());
+		}
+
+		[Test()]
 		public void SetRelFilename()
 		{
 			Filename dude = new Filename();
