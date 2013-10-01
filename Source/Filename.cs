@@ -113,7 +113,6 @@ namespace FilenameBuddy
 		public string GetPath()
 		{
 			StringBuilder strTotalPath = new StringBuilder();
-
 			if (!String.IsNullOrEmpty(m_strFilename))
 			{
 				//tokenize teh string
@@ -157,18 +156,18 @@ namespace FilenameBuddy
 			}
 
 			//put the path back together
-			string strRelativePath = "";
+			StringBuilder strRelativePath = new StringBuilder();
 			while (iContentFolderIndex < pathinfo.Length)
 			{
 				if (0 != pathinfo[iContentFolderIndex].Length)
 				{
-					strRelativePath += pathinfo[iContentFolderIndex] + @"\";
+					strRelativePath.AppendFormat(@"{0}\", pathinfo[iContentFolderIndex]);
 				}
 				iContentFolderIndex++;
 			}
 
 			//return that whole thing we constructed
-			return strRelativePath;
+			return strRelativePath.ToString();
 		}
 
 		/// <summary>
