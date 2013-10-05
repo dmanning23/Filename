@@ -8,6 +8,12 @@ namespace FilenameBuddyTests
 	[TestFixture()]
 	public class Test
 	{
+		[SetUp]
+		public void Setup()
+		{
+			Filename.SetCurrentDirectory(Directory.GetCurrentDirectory() + @"\Content\");
+		}
+
 		/// <summary>
 		/// get the current working directory
 		/// </summary>
@@ -191,6 +197,17 @@ namespace FilenameBuddyTests
 			dude.SetRelFilename(testFile);
 
 			Assert.AreEqual(@"Buttnuts\assnuts\test.txt", dude.GetRelFilename());
+		}
+
+		[Test()]
+		public void SetCurrentDirectory()
+		{
+			Filename.SetCurrentDirectory(@"c:assnuts\shitass\Content\poopstains");
+			Filename dude = new Filename();
+			string testFile = @"Buttnuts\assnuts\test.txt";
+			dude.SetRelFilename(testFile);
+
+			Assert.AreEqual(@"c:assnuts\shitass\Content\Buttnuts\assnuts\test.txt", dude.File);
 		}
 
 		[Test()]

@@ -71,13 +71,13 @@ namespace FilenameBuddy
 			StringBuilder progBuilder = new StringBuilder();
 			for (int i = 0; i < pathinfo.Length; i++)
 			{
-				progBuilder.AppendFormat(@"{0}\", pathinfo[i]);
-
-				//stop after we hit the content folder
+				//stop before we hit the content folder
 				if (pathinfo[i] == "Content")
 				{
 					break;
 				}
+
+				progBuilder.AppendFormat(@"{0}\", pathinfo[i]);
 			}
 
 			ProgramLocation = progBuilder.ToString();
