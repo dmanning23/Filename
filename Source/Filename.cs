@@ -202,7 +202,7 @@ namespace FilenameBuddy
 				string[] pathinfo = m_strFilename.Split(new Char[] { '.' });
 
 				//return the last item
-				return ((pathinfo.Length == 2) ? pathinfo[pathinfo.Length - 1] : "");
+				return ((pathinfo.Length >= 2) ? pathinfo[pathinfo.Length - 1] : "");
 			}
 			else
 			{
