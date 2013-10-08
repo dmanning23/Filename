@@ -176,18 +176,7 @@ namespace FilenameBuddy
 		/// <returns>Get the filename with no path info</returns>
 		public string GetFile()
 		{
-			if (!String.IsNullOrEmpty(m_strFilename))
-			{
-				//tokenize teh string
-				string[] pathinfo = m_strFilename.Split(new Char[] { '/', '\\' });
-
-				//return the last item
-				return ((pathinfo.Length > 0) ? pathinfo[pathinfo.Length - 1] : "");
-			}
-			else
-			{
-				return "";
-			}
+			return Path.GetFileName(m_strFilename);
 		}
 
 		/// <summary>
@@ -196,23 +185,7 @@ namespace FilenameBuddy
 		/// <returns>file extension (no '.')</returns>
 		public string GetFileExt()
 		{
-			if (!String.IsNullOrEmpty(m_strFilename))
-			{
-				//tokenize teh string
-				string[] pathinfo = m_strFilename.Split(new Char[] { '.' });
-
-				//rare there enough items in the filename?
-				if (pathinfo.Length >= 2)
-				{
-					//TODO: only supports files with 3 character extension
-					if (3 == pathinfo[pathinfo.Length - 1].Length)
-					{
-						return pathinfo[pathinfo.Length - 1];
-					}
-				}
-			}
-
-			return "";
+			return Path.GetExtension(m_strFilename);
 		}
 
 		/// <summary>
@@ -222,18 +195,7 @@ namespace FilenameBuddy
 		/// <returns>the filename with no path info or extension</returns>
 		public string GetFileNoExt()
 		{
-			if (!String.IsNullOrEmpty(m_strFilename))
-			{
-				//tokenize teh string
-				string[] pathinfo = m_strFilename.Split(new Char[] { '/', '\\', '.' });
-
-				//return the second to last item
-				return ((pathinfo.Length > 1) ? pathinfo[pathinfo.Length - 2] : "");
-			}
-			else
-			{
-				return "";
-			}
+			return Path.GetFileNameWithoutExtension(m_strFilename);
 		}
 
 		/// <summary>

@@ -141,7 +141,7 @@ namespace FilenameBuddyTests
 		{
 			Filename dude = new Filename();
 			dude.SetRelFilename(@"Content\Buttnuts\assnuts\test.txt");
-			Assert.AreEqual(@"txt", dude.GetFileExt());
+			Assert.AreEqual(@".txt", dude.GetFileExt());
 		}
 
 		[Test()]
@@ -163,10 +163,9 @@ namespace FilenameBuddyTests
 		[Test()]
 		public void GetFileNoExtBreakIt()
 		{
-			//NOTICE HOW THE FILE WITHOUT EXTENSION DOESNT WORK!!!
 			Filename dude = new Filename();
 			dude.SetRelFilename(@"Content\Buttnuts\assnuts\test");
-			Assert.AreNotEqual(@"test", dude.GetFileNoExt());
+			Assert.AreEqual(@"test", dude.GetFileNoExt());
 		}
 
 		[Test()]
@@ -228,6 +227,36 @@ namespace FilenameBuddyTests
 			dude.SetRelFilename(testFile);
 
 			Assert.AreEqual(@"test.txt", dude.GetRelFilename());
+		}
+
+		[Test()]
+		public void FilenameNoExt()
+		{
+			Filename dude = new Filename();
+			string testFile = @"test.txt";
+			dude.SetRelFilename(testFile);
+
+			Assert.AreEqual(@"test", dude.GetFileNoExt());
+		}
+
+		[Test()]
+		public void FilenameNoExt1()
+		{
+			Filename dude = new Filename();
+			string testFile = @"windows.xna\test.txt";
+			dude.SetRelFilename(testFile);
+
+			Assert.AreEqual(@"test", dude.GetFileNoExt());
+		}
+
+		[Test()]
+		public void GetExtension()
+		{
+			Filename dude = new Filename();
+			string testFile = @"windows.xna\test.longextension";
+			dude.SetRelFilename(testFile);
+
+			Assert.AreEqual(@".longextension", dude.GetFileExt());
 		}
 	}
 }
