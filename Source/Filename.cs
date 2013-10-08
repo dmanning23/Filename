@@ -201,13 +201,18 @@ namespace FilenameBuddy
 				//tokenize teh string
 				string[] pathinfo = m_strFilename.Split(new Char[] { '.' });
 
-				//return the last item
-				return ((pathinfo.Length >= 2) ? pathinfo[pathinfo.Length - 1] : "");
+				//rare there enough items in the filename?
+				if (pathinfo.Length >= 2)
+				{
+					//TODO: only supports files with 3 character extension
+					if (3 == pathinfo[pathinfo.Length - 1].Length)
+					{
+						return pathinfo[pathinfo.Length - 1];
+					}
+				}
 			}
-			else
-			{
-				return "";
-			}
+
+			return "";
 		}
 
 		/// <summary>
