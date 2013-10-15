@@ -89,7 +89,7 @@ namespace FilenameBuddy
 		/// <param name="strFileName">the string to use as an absolute filename</param>
 		public Filename(string strFilename)
 		{
-			m_strFilename = strFilename;
+			SetRelFilename(strFilename);
 		}
 
 		/// <summary>
