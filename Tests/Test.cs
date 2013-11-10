@@ -43,7 +43,7 @@ namespace FilenameBuddyTests
 		{
 			//set the filename in teh constructor
 			Filename dude = new Filename("test");
-			Assert.AreEqual("test", dude.File);
+			Assert.AreEqual(progLocation() + @"test", dude.File);
 		}
 
 		[Test()]
