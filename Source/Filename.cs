@@ -93,6 +93,15 @@ namespace FilenameBuddy
 		}
 
 		/// <summary>
+		/// copy constructor
+		/// </summary>
+		/// <param name="strFilename"></param>
+		public Filename(Filename strFilename)
+		{
+			m_strFilename = strFilename.m_strFilename;
+		}
+
+		/// <summary>
 		/// set this filename from a relative path & file
 		/// </summary>
 		/// <param name="strRelFilename"></param>
