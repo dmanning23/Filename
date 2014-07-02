@@ -43,7 +43,7 @@ namespace FilenameBuddy
 		{
 #if WINDOWS
 			//Get the current working directory
-			ProgramLocation = Directory.GetCurrentDirectory() + @"\";
+			SetCurrentDirectory();
 #else
 			//xbox doesnt support current working directory
 			ProgramLocation = "";
@@ -55,6 +55,14 @@ namespace FilenameBuddy
 		/// </summary>
 		public Filename()
 		{
+		}
+
+		/// <summary>
+		/// Set the cwd to the program location
+		/// </summary>
+		static public void SetCurrentDirectory()
+		{
+			ProgramLocation = Directory.GetCurrentDirectory() + @"\";
 		}
 
 		/// <summary>
