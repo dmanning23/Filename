@@ -17,7 +17,7 @@ namespace FilenameBuddy
 		/// </summary>
 		private string m_strFilename;
 
-		#endregion
+		#endregion //Members
 
 		#region Properties
 
@@ -176,7 +176,7 @@ namespace FilenameBuddy
 			StringBuilder strRelativePath = new StringBuilder();
 			while (iContentFolderIndex < pathinfo.Length)
 			{
-				if (0 != pathinfo[iContentFolderIndex].Length)
+				if (!String.IsNullOrEmpty(pathinfo[iContentFolderIndex]))
 				{
 					strRelativePath.AppendFormat(@"{0}\", pathinfo[iContentFolderIndex]);
 				}
@@ -247,6 +247,6 @@ namespace FilenameBuddy
 			return m_strFilename;
 		}
 
-		#endregion
+		#endregion //Methods
 	}
 }
