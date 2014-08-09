@@ -32,7 +32,10 @@ namespace FilenameBuddy
 		public string File
 		{
 			get { return m_strFilename; }
-			set { m_strFilename = value; }
+			set
+			{
+				m_strFilename = value.Replace('\\', '/');
+			}
 		}
 
 		#endregion //Properties
@@ -41,13 +44,8 @@ namespace FilenameBuddy
 
 		static Filename()
 		{
-#if WINDOWS
 			//Get the current working directory
 			SetCurrentDirectory();
-#else
-			//xbox doesnt support current working directory
-			ProgramLocation = "";
-#endif
 		}
 
 		/// <summary>
@@ -62,7 +60,9 @@ namespace FilenameBuddy
 		/// </summary>
 		static public void SetCurrentDirectory()
 		{
+#if WINDOWS
 			ProgramLocation = Directory.GetCurrentDirectory() + @"\";
+#endif
 		}
 
 		/// <summary>
@@ -84,8 +84,12 @@ namespace FilenameBuddy
 				{
 					break;
 				}
-
+				
+#if ANDROID
+				progBuilder.AppendFormat(@"{0}/", pathinfo[i]);
+#else
 				progBuilder.AppendFormat(@"{0}\", pathinfo[i]);
+#endif
 			}
 
 			ProgramLocation = progBuilder.ToString();
@@ -118,9 +122,13 @@ namespace FilenameBuddy
 			//take the program location and append the filename to the end
 			StringBuilder fileBuilder = new StringBuilder();
 			fileBuilder.Append(ProgramLocation);
+#if ANDROID
+			fileBuilder.Append(@"Content/");
+#else
 			fileBuilder.Append(@"Content\");
+#endif
 			fileBuilder.Append(strRelFilename);
-			m_strFilename = fileBuilder.ToString();
+			File = fileBuilder.ToString();
 		}
 
 		/// <summary>
@@ -138,7 +146,11 @@ namespace FilenameBuddy
 				//put the path back together
 				for (int i = 0; i < pathinfo.Length - 1; i++)
 				{
+#if ANDROID
+					strTotalPath.AppendFormat(@"{0}/", pathinfo[i]);
+#else
 					strTotalPath.AppendFormat(@"{0}\", pathinfo[i]);
+#endif
 				}
 			}
 
@@ -178,7 +190,12 @@ namespace FilenameBuddy
 			{
 				if (!String.IsNullOrEmpty(pathinfo[iContentFolderIndex]))
 				{
+#if ANDROID
+					strRelativePath.AppendFormat(@"{0}/", pathinfo[iContentFolderIndex]);
+#else
 					strRelativePath.AppendFormat(@"{0}\", pathinfo[iContentFolderIndex]);
+#endif
+					
 				}
 				iContentFolderIndex++;
 			}
