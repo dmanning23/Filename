@@ -110,7 +110,10 @@ namespace FilenameBuddy
 		/// <param name="strFilename"></param>
 		public Filename(Filename strFilename)
 		{
-			m_strFilename = strFilename.m_strFilename;
+			if (null != strFilename)
+			{
+				m_strFilename = strFilename.m_strFilename;
+			}
 		}
 
 		/// <summary>
