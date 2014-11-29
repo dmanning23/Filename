@@ -34,7 +34,11 @@ namespace FilenameBuddy
 			get { return m_strFilename; }
 			set
 			{
+#if !WINDOWS
 				m_strFilename = value.Replace('\\', '/');
+#else
+				m_strFilename = value;
+#endif
 			}
 		}
 
