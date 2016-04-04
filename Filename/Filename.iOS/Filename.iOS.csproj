@@ -46,7 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Filename.WindowsGL.nuspec">
+    <None Include="Filename.iOS.nuspec">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
