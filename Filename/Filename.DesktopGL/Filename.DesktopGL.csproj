@@ -7,8 +7,8 @@
     <ProjectGuid>{1C84E17D-9A9B-4C81-BD49-CE6FFF7116AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Filename.WindowsGL</RootNamespace>
-    <AssemblyName>Filename.WindowsGL</AssemblyName>
+    <RootNamespace>Filename.DesktopGL</RootNamespace>
+    <AssemblyName>Filename.DesktopGL</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,7 +40,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Filename.WindowsGL.nuspec">
+    <None Include="Filename.DesktopGL.nuspec">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

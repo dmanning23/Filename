@@ -51,7 +51,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Filename.WindowsGL\Filename.WindowsGL.csproj">
+    <ProjectReference Include="..\Filename.DesktopGL\Filename.DesktopGL.csproj">
       <Project>{1c84e17d-9a9b-4c81-bd49-ce6fff7116ad}</Project>
       <Name>Filename.WindowsGL</Name>
     </ProjectReference>
