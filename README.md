@@ -1,4 +1,4 @@
 Filename
 ========
 
-A simple filename helper class for xna content files
+A simple filename helper class for content files

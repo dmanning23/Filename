@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Filename.WindowsGL</id>
+        <version>1.0.0</version>
+        <title>Filename.WindowsGL</title>
+        <authors>dmanning23</authors>
+		<owners>dmanning23</owners>
+		<projectUrl>https://github.com/dmanning23/Filename</projectUrl>
+		<licenseUrl>https://github.com/dmanning23/Filename/blob/master/LICENSE.txt</licenseUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>A simple filename helper class for content files</description>
+		<releaseNotes />
+		<copyright>Copyright 2016</copyright>
+		<tags></tags>
+		<dependencies>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="Y:\Documents\Projects\Filename\Filename\Filename.WindowsGL\bin\Release\Filename.WindowsGL.pdb" target="lib\Filename.WindowsGL.pdb" />
+        <file src="Y:\Documents\Projects\Filename\Filename\Filename.WindowsGL\bin\Release\Filename.WindowsGL.dll" target="lib\Filename.WindowsGL.dll" />
+    </files>
+</package>
