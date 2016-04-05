@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("Filename.Android.Resource", IsApplication=false)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("FilenameBuddy.Android.Resource", IsApplication=false)]
 
-namespace Filename.Android
+namespace FilenameBuddy.Android
 {
 	
 	

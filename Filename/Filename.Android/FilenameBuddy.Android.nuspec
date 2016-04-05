@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
-        <id>Filename.Android</id>
+        <id>FilenameBuddy.Android</id>
         <version>1.0.0</version>
-        <title>Filename.Android</title>
+        <title>FilenameBuddy.Android</title>
         <authors>dmanning23</authors>
 		<owners>dmanning23</owners>
 		<projectUrl>https://github.com/dmanning23/Filename</projectUrl>
@@ -17,7 +17,7 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="Y:\Documents\Projects\Filename\Filename\Filename.Android\bin\Release\Filename.Android.pdb" target="lib\Filename.Android.pdb" />
-        <file src="Y:\Documents\Projects\Filename\Filename\Filename.Android\bin\Release\Filename.Android.dll" target="lib\Filename.Android.dll" />
+        <file src="Y:\Documents\Projects\Filename\Filename\Filename.Android\bin\Release\FilenameBuddy.Android.pdb" target="lib\FilenameBuddy.Android.pdb" />
+        <file src="Y:\Documents\Projects\Filename\Filename\Filename.Android\bin\Release\FilenameBuddy.Android.dll" target="lib\FilenameBuddy.Android.dll" />
     </files>
 </package>

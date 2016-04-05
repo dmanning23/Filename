@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Filename.DesktopGL", "Filename.DesktopGL\Filename.DesktopGL.csproj", "{1C84E17D-9A9B-4C81-BD49-CE6FFF7116AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilenameBuddy.DesktopGL", "Filename.DesktopGL\FilenameBuddy.DesktopGL.csproj", "{1C84E17D-9A9B-4C81-BD49-CE6FFF7116AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Filename.Android", "Filename.Android\Filename.Android.csproj", "{015C079F-E42A-415F-8352-E9B3FC008F8D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilenameBuddy.Android", "Filename.Android\FilenameBuddy.Android.csproj", "{015C079F-E42A-415F-8352-E9B3FC008F8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Filename.Tests", "Filename.Tests\Filename.Tests.csproj", "{5D1E51A0-1789-4599-A75D-BA5B391F2D54}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilenameBuddy.Tests", "Filename.Tests\FilenameBuddy.Tests.csproj", "{5D1E51A0-1789-4599-A75D-BA5B391F2D54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Filename.iOS", "Filename.iOS\Filename.iOS.csproj", "{2662F245-95BF-4635-988C-5BBE1CA31093}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilenameBuddy.iOS", "Filename.iOS\FilenameBuddy.iOS.csproj", "{2662F245-95BF-4635-988C-5BBE1CA31093}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

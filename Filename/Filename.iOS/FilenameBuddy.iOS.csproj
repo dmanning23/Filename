@@ -8,9 +8,9 @@
     <ProjectGuid>{2662F245-95BF-4635-988C-5BBE1CA31093}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>Filename.iOS</RootNamespace>
+    <RootNamespace>FilenameBuddy.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>Filename.iOS</AssemblyName>
+    <AssemblyName>FilenameBuddy.iOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
