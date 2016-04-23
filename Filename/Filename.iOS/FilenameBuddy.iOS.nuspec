@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
-    <metadata>
-        <id>FilenameBuddy.iOS</id>
-        <version>1.0.1</version>
-        <title>FilenameBuddy.iOS</title>
-        <authors>dmanning23</authors>
+	<metadata>
+		<id>FilenameBuddy.iOS</id>
+		<version>1.0.2</version>
+		<title>FilenameBuddy.iOS</title>
+		<authors>dmanning23</authors>
 		<owners>dmanning23</owners>
 		<projectUrl>https://github.com/dmanning23/Filename</projectUrl>
 		<licenseUrl>https://github.com/dmanning23/Filename/blob/master/LICENSE.txt</licenseUrl>
@@ -14,10 +14,10 @@
 		<copyright>Copyright 2016</copyright>
 		<tags></tags>
 		<dependencies>
-        </dependencies>
-    </metadata>
-    <files>
-        <file src="Y:\Documents\Projects\Filename\Filename\Filename.iOS\bin\Release\FilenameBuddy.iOS.pdb" target="lib\FilenameBuddy.iOS.pdb" />
-        <file src="Y:\Documents\Projects\Filename\Filename\Filename.iOS\bin\Release\FilenameBuddy.iOS.dll" target="lib\FilenameBuddy.iOS.dll" />
-    </files>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="bin\Release\FilenameBuddy.iOS.pdb" target="lib\FilenameBuddy.iOS.pdb" />
+		<file src="bin\Release\FilenameBuddy.iOS.dll" target="lib\FilenameBuddy.iOS.dll" />
+	</files>
 </package>
