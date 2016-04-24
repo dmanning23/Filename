@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilenameBuddy.iOS", "Filena
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilenameBuddy.WindowsUniversal", "Filename.WindowsUniversal\FilenameBuddy.WindowsUniversal.csproj", "{6951C9DF-6789-47E2-986E-C32C73A0B86A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{410DBF63-2288-4351-BFCD-4AE50BCE040B}"
+	ProjectSection(SolutionItems) = preProject
+		buildNugetPackages.ps1 = buildNugetPackages.ps1
+		FilenameBuddy.nuspec = FilenameBuddy.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AppStore|Any CPU = AppStore|Any CPU
