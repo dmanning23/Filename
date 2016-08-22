@@ -10,14 +10,14 @@ namespace FilenameBuddy
 	/// </summary>
 	public class Filename
 	{
-		#region Members
+		#region Fields
 
 		/// <summary>
 		/// The full path and filename
 		/// </summary>
-		private string m_strFilename;
+		private string _filename;
 
-		#endregion //Members
+		#endregion //Fields
 
 		#region Properties
 
@@ -31,13 +31,13 @@ namespace FilenameBuddy
 		/// </summary>
 		public string File
 		{
-			get { return m_strFilename; }
+			get { return _filename; }
 			set
 			{
 #if !WINDOWS
-				m_strFilename = value.Replace('\\', '/');
+				_filename = value.Replace('\\', '/');
 #else
-				m_strFilename = value;
+				_filename = value;
 #endif
 			}
 		}
@@ -74,10 +74,10 @@ namespace FilenameBuddy
 		/// This will set the program location to the folder right before "Content"
 		/// </summary>
 		/// <param name="strCurrentDirectory">The current directory of the application.</param>
-		static public void SetCurrentDirectory(string strCurrentDirectory)
+		static public void SetCurrentDirectory(string currentDirectory)
 		{
 			//tokenize teh string
-			string[] pathinfo = strCurrentDirectory.Split(new Char[] { '/', '\\' });
+			string[] pathinfo = currentDirectory.Split(new Char[] { '/', '\\' });
 
 			//find the content folder
 			StringBuilder progBuilder = new StringBuilder();
@@ -102,29 +102,29 @@ namespace FilenameBuddy
 		/// <summary>
 		/// construct a filename from a string that is an absolute filename
 		/// </summary>
-		/// <param name="strFileName">the string to use as an absolute filename</param>
-		public Filename(string strFilename)
+		/// <param name="relFilename">the string to use as an absolute filename</param>
+		public Filename(string relFilename)
 		{
-			SetRelFilename(strFilename);
+			SetRelFilename(relFilename);
 		}
 
 		/// <summary>
 		/// copy constructor
 		/// </summary>
 		/// <param name="strFilename"></param>
-		public Filename(Filename strFilename)
+		public Filename(Filename filename)
 		{
-			if (null != strFilename)
+			if (null != filename)
 			{
-				m_strFilename = strFilename.m_strFilename;
+				_filename = filename._filename;
 			}
 		}
 
 		/// <summary>
 		/// set this filename from a relative path & file
 		/// </summary>
-		/// <param name="strRelFilename"></param>
-		public void SetRelFilename(string strRelFilename)
+		/// <param name="relFilename"></param>
+		public void SetRelFilename(string relFilename)
 		{
 			//take the program location and append the filename to the end
 			StringBuilder fileBuilder = new StringBuilder();
@@ -134,7 +134,7 @@ namespace FilenameBuddy
 #else
 			fileBuilder.Append(@"Content\");
 #endif
-			fileBuilder.Append(strRelFilename);
+			fileBuilder.Append(relFilename);
 			File = fileBuilder.ToString();
 		}
 
@@ -144,24 +144,24 @@ namespace FilenameBuddy
 		/// <returns>The path to a file with a ' at the end</returns>
 		public string GetPath()
 		{
-			StringBuilder strTotalPath = new StringBuilder();
-			if (!String.IsNullOrEmpty(m_strFilename))
+			StringBuilder totalPath = new StringBuilder();
+			if (!String.IsNullOrEmpty(_filename))
 			{
 				//tokenize teh string
-				string[] pathinfo = m_strFilename.Split(new Char[] { '/', '\\' });
+				string[] pathinfo = _filename.Split(new Char[] { '/', '\\' });
 
 				//put the path back together
 				for (int i = 0; i < pathinfo.Length - 1; i++)
 				{
 #if ANDROID
-					strTotalPath.AppendFormat(@"{0}/", pathinfo[i]);
+					totalPath.AppendFormat(@"{0}/", pathinfo[i]);
 #else
-					strTotalPath.AppendFormat(@"{0}\", pathinfo[i]);
+					totalPath.AppendFormat(@"{0}\", pathinfo[i]);
 #endif
 				}
 			}
 
-			return strTotalPath.ToString();
+			return totalPath.ToString();
 		}
 
 		/// <summary>
@@ -170,7 +170,7 @@ namespace FilenameBuddy
 		/// <returns>the path to the file, starting at but excluding the "Content" directory</returns>
 		public string GetRelPath()
 		{
-			if (String.IsNullOrEmpty(m_strFilename))
+			if (String.IsNullOrEmpty(_filename))
 			{
 					return "";
 			}
@@ -179,36 +179,36 @@ namespace FilenameBuddy
 			string[] pathinfo = GetPath().Split(new Char[] { '/', '\\' });
 
 			//find the content folder
-			int iContentFolderIndex = 1;
-			while (iContentFolderIndex < pathinfo.Length)
+			int contentFolderIndex = 1;
+			while (contentFolderIndex < pathinfo.Length)
 			{
 				//skip over the content folder itself
-				if (pathinfo[iContentFolderIndex - 1] == "Content")
+				if (pathinfo[contentFolderIndex - 1] == "Content")
 				{
 					break;
 				}
 
-				iContentFolderIndex++;
+				contentFolderIndex++;
 			}
 
 			//put the path back together
-			StringBuilder strRelativePath = new StringBuilder();
-			while (iContentFolderIndex < pathinfo.Length)
+			StringBuilder relativePath = new StringBuilder();
+			while (contentFolderIndex < pathinfo.Length)
 			{
-				if (!String.IsNullOrEmpty(pathinfo[iContentFolderIndex]))
+				if (!String.IsNullOrEmpty(pathinfo[contentFolderIndex]))
 				{
 #if ANDROID
-					strRelativePath.AppendFormat(@"{0}/", pathinfo[iContentFolderIndex]);
+					relativePath.AppendFormat(@"{0}/", pathinfo[contentFolderIndex]);
 #else
-					strRelativePath.AppendFormat(@"{0}\", pathinfo[iContentFolderIndex]);
+					relativePath.AppendFormat(@"{0}\", pathinfo[contentFolderIndex]);
 #endif
 					
 				}
-				iContentFolderIndex++;
+				contentFolderIndex++;
 			}
 
 			//return that whole thing we constructed
-			return strRelativePath.ToString();
+			return relativePath.ToString();
 		}
 
 		/// <summary>
@@ -217,7 +217,7 @@ namespace FilenameBuddy
 		/// <returns>Get the filename with no path info</returns>
 		public string GetFile()
 		{
-			return Path.GetFileName(m_strFilename);
+			return Path.GetFileName(_filename);
 		}
 
 		/// <summary>
@@ -226,7 +226,7 @@ namespace FilenameBuddy
 		/// <returns>file extension (no '.')</returns>
 		public string GetFileExt()
 		{
-			return Path.GetExtension(m_strFilename);
+			return Path.GetExtension(_filename);
 		}
 
 		/// <summary>
@@ -236,7 +236,7 @@ namespace FilenameBuddy
 		/// <returns>the filename with no path info or extension</returns>
 		public string GetFileNoExt()
 		{
-			return Path.GetFileNameWithoutExtension(m_strFilename);
+			return Path.GetFileNameWithoutExtension(_filename);
 		}
 
 		/// <summary>
@@ -268,7 +268,7 @@ namespace FilenameBuddy
 		/// <returns>the whole path and filename</returns>
 		public override string ToString()
 		{
-			return m_strFilename;
+			return _filename;
 		}
 
 		#endregion //Methods
