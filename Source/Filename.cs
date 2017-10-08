@@ -271,6 +271,11 @@ namespace FilenameBuddy
 			return _filename;
 		}
 
+		public bool Compare(Filename inst)
+		{
+			return File == inst.File;
+		}
+
 		#endregion //Methods
 	}
 }

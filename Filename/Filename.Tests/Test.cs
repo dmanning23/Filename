@@ -258,5 +258,23 @@ namespace FilenameBuddyTests
 
 			Assert.AreEqual(@".longextension", dude.GetFileExt());
 		}
+
+		[Test]
+		public void Comparison()
+		{
+			var dude1 = new Filename("dude");
+			var dude2 = new Filename("dude");
+
+			Assert.IsTrue(dude1.Compare(dude2));
+		}
+
+		[Test]
+		public void Comparison_false()
+		{
+			var dude1 = new Filename("dude");
+			var dude2 = new Filename("cat");
+
+			Assert.IsFalse(dude1.Compare(dude2));
+		}
 	}
 }
