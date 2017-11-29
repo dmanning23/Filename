@@ -89,7 +89,7 @@ namespace FilenameBuddy
 					break;
 				}
 				
-#if ANDROID
+#if ANDROID || __IOS__
 				progBuilder.AppendFormat(@"{0}/", pathinfo[i]);
 #else
 				progBuilder.AppendFormat(@"{0}\", pathinfo[i]);
@@ -129,7 +129,7 @@ namespace FilenameBuddy
 			//take the program location and append the filename to the end
 			StringBuilder fileBuilder = new StringBuilder();
 			fileBuilder.Append(ProgramLocation);
-#if ANDROID
+#if ANDROID || __IOS__
 			fileBuilder.Append(@"Content/");
 #else
 			fileBuilder.Append(@"Content\");
@@ -153,7 +153,7 @@ namespace FilenameBuddy
 				//put the path back together
 				for (int i = 0; i < pathinfo.Length - 1; i++)
 				{
-#if ANDROID
+#if ANDROID || __IOS__
 					totalPath.AppendFormat(@"{0}/", pathinfo[i]);
 #else
 					totalPath.AppendFormat(@"{0}\", pathinfo[i]);
@@ -197,7 +197,7 @@ namespace FilenameBuddy
 			{
 				if (!String.IsNullOrEmpty(pathinfo[contentFolderIndex]))
 				{
-#if ANDROID
+#if ANDROID || __IOS__
 					relativePath.AppendFormat(@"{0}/", pathinfo[contentFolderIndex]);
 #else
 					relativePath.AppendFormat(@"{0}\", pathinfo[contentFolderIndex]);
