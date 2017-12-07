@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
+using System.Collections;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
 
 namespace FilenameBuddy
 {
@@ -88,7 +91,7 @@ namespace FilenameBuddy
 				{
 					break;
 				}
-				
+
 #if ANDROID || __IOS__
 				progBuilder.AppendFormat(@"{0}/", pathinfo[i]);
 #else
@@ -172,7 +175,7 @@ namespace FilenameBuddy
 		{
 			if (String.IsNullOrEmpty(_filename))
 			{
-					return "";
+				return "";
 			}
 
 			//tokenize teh string
@@ -202,7 +205,7 @@ namespace FilenameBuddy
 #else
 					relativePath.AppendFormat(@"{0}\", pathinfo[contentFolderIndex]);
 #endif
-					
+
 				}
 				contentFolderIndex++;
 			}
@@ -274,6 +277,26 @@ namespace FilenameBuddy
 		public bool Compare(Filename inst)
 		{
 			return File == inst.File;
+		}
+
+		/// <summary>
+		/// Get a list of all the files in the content folder
+		/// </summary>
+		/// <returns></returns>
+		public static IEnumerable<Filename> AllContentFiles()
+		{
+			var entries = Directory.GetFileSystemEntries($"{Filename.ProgramLocation}Content", "*", SearchOption.AllDirectories);
+			return entries.Select(x => new Filename() { File = x });
+		}
+
+		/// <summary>
+		/// Get a list of the files in the content folder of a certain type
+		/// </summary>
+		/// <returns></returns>
+		public static IEnumerable<Filename> ContentFilesOfType(string extension)
+		{
+			var entries = Directory.GetFileSystemEntries($"{Filename.ProgramLocation}Content", "*", SearchOption.AllDirectories);
+			return entries.Select(x => new Filename() { File = x }).Where(x => x.GetFileExt() == extension);
 		}
 
 		#endregion //Methods
