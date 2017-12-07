@@ -283,6 +283,22 @@ namespace FilenameBuddy
 		/// Get a list of all the files in the content folder
 		/// </summary>
 		/// <returns></returns>
+		public static IEnumerable<Filename> ContentFiles(string extension = "")
+		{
+			if (string.IsNullOrEmpty(extension))
+			{
+				return AllContentFiles();
+			}
+			else
+			{
+				return ContentFilesOfType(extension);
+			}
+		}
+
+		/// <summary>
+		/// Get a list of all the files in the content folder
+		/// </summary>
+		/// <returns></returns>
 		public static IEnumerable<Filename> AllContentFiles()
 		{
 			var entries = Directory.GetFileSystemEntries($"{Filename.ProgramLocation}Content", "*", SearchOption.AllDirectories);
