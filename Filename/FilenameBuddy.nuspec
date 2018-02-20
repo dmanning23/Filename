@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>FilenameBuddy</id>
-		<version>1.0.9</version>
+		<version>1.0.10</version>
 		<title>FilenameBuddy</title>
 		<authors>dmanning23</authors>
 		<owners>dmanning23</owners>
@@ -36,9 +36,9 @@
 		<file src="Filename.WindowsUniversal\bin\Release\FilenameBuddy.WindowsUniversal.pdb" target="lib\uap10.0\FilenameBuddy.WindowsUniversal.pdb" />
 		<file src="Filename.WindowsUniversal\bin\Release\FilenameBuddy.WindowsUniversal.dll" target="lib\uap10.0\FilenameBuddy.WindowsUniversal.dll" />
 
-		<!--DesktopGL-->
-		<file src="Filename.DesktopGL\bin\Release\FilenameBuddy.DesktopGL.pdb" target="lib\net452\FilenameBuddy.DesktopGL.pdb" />
-		<file src="Filename.DesktopGL\bin\Release\FilenameBuddy.DesktopGL.dll" target="lib\net452\FilenameBuddy.DesktopGL.dll" />
+		<!--WindowsDX-->
+		<file src="Filename.WindowsDX\bin\Release\FilenameBuddy.WindowsDX.pdb" target="lib\net452\FilenameBuddy.WindowsDX.pdb" />
+		<file src="Filename.WindowsDX\bin\Release\FilenameBuddy.WindowsDX.dll" target="lib\net452\FilenameBuddy.WindowsDX.dll" />
 
 	</files>
 </package>
