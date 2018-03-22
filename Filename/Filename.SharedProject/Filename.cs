@@ -283,15 +283,15 @@ namespace FilenameBuddy
 		/// Get a list of all the files in the content folder
 		/// </summary>
 		/// <returns></returns>
-		public static IEnumerable<Filename> ContentFiles(string extension = "")
+		public static IEnumerable<Filename> ContentFiles(string folder = "", string extension = "")
 		{
 			if (string.IsNullOrEmpty(extension))
 			{
-				return AllContentFiles();
+				return AllContentFiles(folder);
 			}
 			else
 			{
-				return ContentFilesOfType(extension);
+				return ContentFilesOfType(folder, extension);
 			}
 		}
 
@@ -299,9 +299,10 @@ namespace FilenameBuddy
 		/// Get a list of all the files in the content folder
 		/// </summary>
 		/// <returns></returns>
-		public static IEnumerable<Filename> AllContentFiles()
+		public static IEnumerable<Filename> AllContentFiles(string folder)
 		{
-			var entries = Directory.GetFileSystemEntries($"{Filename.ProgramLocation}Content", "*", SearchOption.AllDirectories);
+			string filter = GetFilterLocation(folder);
+			var entries = Directory.GetFileSystemEntries(filter, "*", SearchOption.AllDirectories);
 			return entries.Select(x => new Filename() { File = x });
 		}
 
@@ -309,10 +310,27 @@ namespace FilenameBuddy
 		/// Get a list of the files in the content folder of a certain type
 		/// </summary>
 		/// <returns></returns>
-		public static IEnumerable<Filename> ContentFilesOfType(string extension)
+		public static IEnumerable<Filename> ContentFilesOfType(string folder, string extension)
 		{
-			var entries = Directory.GetFileSystemEntries($"{Filename.ProgramLocation}Content", "*", SearchOption.AllDirectories);
+			string filter = GetFilterLocation(folder);
+			var entries = Directory.GetFileSystemEntries(filter, "*", SearchOption.AllDirectories);
 			return entries.Select(x => new Filename() { File = x }).Where(x => x.GetFileExt() == extension);
+		}
+
+		private static string GetFilterLocation(string folder)
+		{
+			if (string.IsNullOrEmpty(folder))
+			{
+				return $"{Filename.ProgramLocation}Content";
+			}
+			else
+			{
+#if ANDROID || __IOS__
+				return $@"{Filename.ProgramLocation}Content/{folder}";
+#else
+				return $@"{Filename.ProgramLocation}Content\{folder}";
+#endif
+			}
 		}
 
 		#endregion //Methods

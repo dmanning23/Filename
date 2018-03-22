@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using FilenameBuddy;
 using System.IO;
+using Shouldly;
 
 namespace FilenameBuddyTests
 {
@@ -43,7 +44,7 @@ namespace FilenameBuddyTests
 		{
 			//set the filename in teh constructor
 			Filename dude = new Filename("test");
-			Assert.AreEqual(progLocation() + @"test", dude.File);
+			dude.File.ShouldBe(progLocation() + @"test");
 		}
 
 		[Test()]
@@ -69,7 +70,7 @@ namespace FilenameBuddyTests
 		{
 			Filename dude = new Filename();
 			dude.SetRelFilename("test");
-			Assert.AreEqual(progLocation() + @"test", dude.File);
+			dude.File.ShouldBe(progLocation() + @"test");
 		}
 
 		[Test()]
@@ -77,7 +78,7 @@ namespace FilenameBuddyTests
 		{
 			Filename dude = new Filename();
 			dude.SetRelFilename(@"Buttnuts\test.txt");
-			Assert.AreEqual(progLocation() + @"Buttnuts\test.txt", dude.File);
+			dude.File.ShouldBe(progLocation() + @"Buttnuts\test.txt");
 		}
 
 		[Test()]
@@ -206,7 +207,7 @@ namespace FilenameBuddyTests
 			string testFile = @"Buttnuts\assnuts\test.txt";
 			dude.SetRelFilename(testFile);
 
-			Assert.AreEqual(@"c:assnuts\shitass\Content\Buttnuts\assnuts\test.txt", dude.File);
+			dude.File.ShouldBe(@"c:assnuts/shitass/Content/Buttnuts/assnuts/test.txt");
 		}
 
 		[Test()]
