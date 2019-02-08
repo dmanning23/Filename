@@ -21,7 +21,7 @@ namespace FilenameBuddyTests
 		/// <returns>The location.</returns>
 		string progLocation()
 		{
-			return Directory.GetCurrentDirectory() + @"\Content\";
+			return Filename.ReplaceSlashes(Directory.GetCurrentDirectory() + @"\Content\");
 		}
 
 		[Test()]
@@ -207,7 +207,7 @@ namespace FilenameBuddyTests
 			string testFile = @"Buttnuts\assnuts\test.txt";
 			dude.SetRelFilename(testFile);
 
-			dude.File.ShouldBe(@"c:assnuts/shitass/Content/Buttnuts/assnuts/test.txt");
+			dude.File.ShouldBe(Filename.ReplaceSlashes(@"c:assnuts/shitass/Content/Buttnuts/assnuts/test.txt"));
 		}
 
 		[Test()]
@@ -276,6 +276,52 @@ namespace FilenameBuddyTests
 			var dude2 = new Filename("cat");
 
 			Assert.IsFalse(dude1.Compare(dude2));
+		}
+
+		[Test]
+		public void HasFilename1()
+		{
+			var dude = new Filename();
+			dude.HasFilename.ShouldBeFalse();
+		}
+
+		[Test]
+		public void HasFilename2()
+		{
+			var dude = new Filename("dude");
+			dude.HasFilename.ShouldBeTrue();
+		}
+
+		[Test]
+		public void HasFilename3()
+		{
+			var dude = new Filename();
+			dude.File = "dude";
+			dude.HasFilename.ShouldBeTrue();
+		}
+
+		[Test]
+		public void HasFilename4()
+		{
+			var dude1 = new Filename("dude");
+			var dude2 = new Filename(dude1);
+			dude2.HasFilename.ShouldBeTrue();
+		}
+
+		[Test]
+		public void HasFilename5()
+		{
+			var dude1 = new Filename();
+			var dude2 = new Filename(dude1);
+			dude2.HasFilename.ShouldBeFalse();
+		}
+
+		[Test]
+		public void HasFilename6()
+		{
+			var dude1 = new Filename();
+			dude1.SetRelFilename("dude");
+			dude1.HasFilename.ShouldBeTrue();
 		}
 	}
 }

@@ -37,17 +37,32 @@ namespace FilenameBuddy
 			get { return _filename; }
 			set
 			{
-#if !WINDOWS
-				_filename = value.Replace('\\', '/');
-#else
-				_filename = value;
-#endif
+				_filename = ReplaceSlashes(value);
+				HasFilename = !string.IsNullOrEmpty(value);
 			}
 		}
+
+		public bool HasFilename { get; private set; }
 
 		#endregion //Properties
 
 		#region Methods
+
+		public static string ReplaceSlashes(string initialString)
+		{
+			if (!string.IsNullOrEmpty(initialString))
+			{
+#if !WINDOWS
+				return initialString.Replace('\\', '/');
+#else
+				return initialString.Replace('/', '\\');
+#endif
+			}
+			else
+			{
+				return string.Empty;
+			}
+		}
 
 		static Filename()
 		{
@@ -60,6 +75,7 @@ namespace FilenameBuddy
 		/// </summary>
 		public Filename()
 		{
+			HasFilename = false;
 		}
 
 		/// <summary>
@@ -119,7 +135,7 @@ namespace FilenameBuddy
 		{
 			if (null != filename)
 			{
-				_filename = filename._filename;
+				File = filename._filename;
 			}
 		}
 
@@ -139,6 +155,7 @@ namespace FilenameBuddy
 #endif
 			fileBuilder.Append(relFilename);
 			File = fileBuilder.ToString();
+			HasFilename = true;
 		}
 
 		/// <summary>
