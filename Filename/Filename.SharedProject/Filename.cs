@@ -292,16 +292,18 @@ namespace FilenameBuddy
 			return GetRelPath() + GetFile();
 		}
 
+		public void SetFilenameRelativeToPath(Filename currentLocation, string relativeFilename)
+		{
+			var uri1 = new Uri($"{currentLocation.GetPath()}{relativeFilename}");
+			File = uri1.ToString();
+		}
+
 		public string GetFilenameRelativeToPath(Filename path)
 		{
 			var uri1 = new Uri(path.File);
 			var uri2 = new Uri(File);
 			var result = uri1.MakeRelativeUri(uri2).ToString();
-#if ANDROID || __IOS__
-			return result.Replace('\\', '/');
-#else
-			return result.Replace('/', '\\');
-#endif
+			return ReplaceSlashes(result);
 		}
 
 		/// <summary>

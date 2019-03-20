@@ -328,6 +328,17 @@ namespace FilenameBuddyTests
 			secondFilename.GetRelFilename().ShouldBe(@"Buttnuts/assnuts/catpants/cat.png");
 		}
 
+		[TestCase(@"test1\test.txt", @"test2.txt", @"test1/test2.txt")]
+		[TestCase(@"test1\test.txt", @"test3\test2.txt", @"test1/test3/test2.txt")]
+		[TestCase(@"test1\test2\test3.txt", @"..\test4\test5.txt", @"test1/test4/test5.txt")]
+		public void SetFilenameRelativeToPath(string original, string target, string expectedResult)
+		{
+			var originalFilename = new Filename(original);
+			var targetFilename = new Filename();
+			targetFilename.SetFilenameRelativeToPath(originalFilename, target);
+			targetFilename.GetRelFilename().ShouldBe(expectedResult);
+		}
+
 		[TestCase(@"test1\test.txt", @"test1\test2.txt", @"test2.txt")]
 		[TestCase(@"test1\test.txt", @"test1\test3\test2.txt", @"test3/test2.txt")]
 		[TestCase(@"test1\test2\test3.txt", @"test1\test4\test5.txt", @"../test4/test5.txt")]
