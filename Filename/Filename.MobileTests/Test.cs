@@ -25,13 +25,6 @@ namespace FilenameBuddyTests
 		}
 
 		[Test()]
-		public void StaticConstructor()
-		{
-			//get teh program location
-			Assert.AreEqual(Directory.GetCurrentDirectory() + "\\", Filename.ProgramLocation);
-		}
-
-		[Test()]
 		public void DefaultConstructor()
 		{
 			//default constructor = no filename
@@ -62,7 +55,7 @@ namespace FilenameBuddyTests
 			//set the name and get it back
 			Filename dude = new Filename();
 			dude.File = progLocation() + @"Buttnuts\test.txt";
-			Assert.AreEqual(@"Buttnuts\test.txt", dude.GetRelFilename());
+			Assert.AreEqual(@"Buttnuts/test.txt", dude.GetRelFilename());
 		}
 
 		[Test()]
@@ -78,7 +71,7 @@ namespace FilenameBuddyTests
 		{
 			Filename dude = new Filename();
 			dude.SetRelFilename(@"Buttnuts\test.txt");
-			dude.File.ShouldBe(progLocation() + @"Buttnuts\test.txt");
+			dude.File.ShouldBe(progLocation() + @"Buttnuts/test.txt");
 		}
 
 		[Test()]
@@ -110,7 +103,7 @@ namespace FilenameBuddyTests
 		{
 			Filename dude = new Filename();
 			dude.SetRelFilename(@"Buttnuts\test.txt");
-			Assert.AreEqual(@"Buttnuts\", dude.GetRelPath());
+			Assert.AreEqual(@"Buttnuts/", dude.GetRelPath());
 		}
 
 		[Test()]
@@ -118,7 +111,7 @@ namespace FilenameBuddyTests
 		{
 			Filename dude = new Filename();
 			dude.SetRelFilename(@"Buttnuts\assnuts\test.txt");
-			Assert.AreEqual(@"Buttnuts\assnuts\", dude.GetRelPath());
+			Assert.AreEqual(@"Buttnuts/assnuts/", dude.GetRelPath());
 		}
 
 		[Test()]
@@ -176,7 +169,7 @@ namespace FilenameBuddyTests
 			string testFile = @"Buttnuts\assnuts\test.txt";
 			dude.SetRelFilename(testFile);
 
-			Assert.AreEqual(progLocation() + @"Buttnuts\assnuts\test", dude.GetPathFileNoExt());
+			Assert.AreEqual(progLocation() + @"Buttnuts/assnuts/test", dude.GetPathFileNoExt());
 		}
 
 		[Test()]
@@ -186,7 +179,7 @@ namespace FilenameBuddyTests
 			string testFile = @"Buttnuts\assnuts\test.txt";
 			dude.SetRelFilename(testFile);
 
-			Assert.AreEqual(@"Buttnuts\assnuts\test", dude.GetRelPathFileNoExt());
+			Assert.AreEqual(@"Buttnuts/assnuts/test", dude.GetRelPathFileNoExt());
 		}
 
 		[Test()]
@@ -196,7 +189,7 @@ namespace FilenameBuddyTests
 			string testFile = @"Buttnuts\assnuts\test.txt";
 			dude.SetRelFilename(testFile);
 
-			Assert.AreEqual(@"Buttnuts\assnuts\test.txt", dude.GetRelFilename());
+			Assert.AreEqual(@"Buttnuts/assnuts/test.txt", dude.GetRelFilename());
 		}
 
 		[Test()]
@@ -332,12 +325,12 @@ namespace FilenameBuddyTests
 			originalLocation.SetRelFilename(testFile);
 
 			var secondFilename = new Filename(originalLocation, "catpants\\cat.png");
-			secondFilename.GetRelFilename().ShouldBe(@"Buttnuts\assnuts\catpants\cat.png");
+			secondFilename.GetRelFilename().ShouldBe(@"Buttnuts/assnuts/catpants/cat.png");
 		}
 
 		[TestCase(@"test1\test.txt", @"test1\test2.txt", @"test2.txt")]
-		[TestCase(@"test1\test.txt", @"test1\test3\test2.txt", @"test3\test2.txt")]
-		[TestCase(@"test1\test2\test3.txt", @"test1\test4\test5.txt", @"..\test4\test5.txt")]
+		[TestCase(@"test1\test.txt", @"test1\test3\test2.txt", @"test3/test2.txt")]
+		[TestCase(@"test1\test2\test3.txt", @"test1\test4\test5.txt", @"../test4/test5.txt")]
 		public void GetFilenameRelativeToPath(string original, string target, string expectedResult)
 		{
 			var originalFilename = new Filename(original);

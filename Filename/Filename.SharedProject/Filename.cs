@@ -140,6 +140,16 @@ namespace FilenameBuddy
 		}
 
 		/// <summary>
+		/// Construct this filename as a location relative to another filename
+		/// </summary>
+		/// <param name="currentLocation"></param>
+		/// <param name="relativeFilename"></param>
+		public Filename(Filename currentLocation, string relativeFilename)
+			: this($"{currentLocation.GetRelPath()}{relativeFilename}")
+		{
+		}
+
+		/// <summary>
 		/// set this filename from a relative path & file
 		/// </summary>
 		/// <param name="relFilename"></param>
@@ -280,6 +290,18 @@ namespace FilenameBuddy
 		public string GetRelFilename()
 		{
 			return GetRelPath() + GetFile();
+		}
+
+		public string GetFilenameRelativeToPath(Filename path)
+		{
+			var uri1 = new Uri(path.File);
+			var uri2 = new Uri(File);
+			var result = uri1.MakeRelativeUri(uri2).ToString();
+#if ANDROID || __IOS__
+			return result.Replace('\\', '/');
+#else
+			return result.Replace('/', '\\');
+#endif
 		}
 
 		/// <summary>
