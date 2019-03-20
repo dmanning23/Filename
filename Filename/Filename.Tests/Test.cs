@@ -355,5 +355,16 @@ namespace FilenameBuddyTests
 			var targetFilename = new Filename(target);
 			targetFilename.GetFilenameRelativeToPath(originalFilename).ShouldBe(expectedResult);
 		}
+
+		[Test]
+		public void SetFilenameRelativeToPath_fullPAth()
+		{
+			var originalFilename = new Filename(@"test1\test.txt");
+			var targetFilename = new Filename();
+			targetFilename.SetFilenameRelativeToPath(originalFilename, @"test2.txt");
+
+			var expectedResult = $@"{Filename.ProgramLocation}Content\test1\test2.txt";
+			targetFilename.File.ShouldBe(expectedResult);
+		}
 	}
 }

@@ -295,7 +295,7 @@ namespace FilenameBuddy
 		public void SetFilenameRelativeToPath(Filename currentLocation, string relativeFilename)
 		{
 			var uri1 = new Uri($"{currentLocation.GetPath()}{relativeFilename}");
-			File = uri1.ToString();
+			File = uri1.PathAndQuery.ToString();
 		}
 
 		public string GetFilenameRelativeToPath(Filename path)
