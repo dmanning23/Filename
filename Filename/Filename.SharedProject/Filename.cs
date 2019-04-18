@@ -294,8 +294,12 @@ namespace FilenameBuddy
 
 		public void SetFilenameRelativeToPath(Filename currentLocation, string relativeFilename)
 		{
+#if ANDROID
+			File = $"{currentLocation.GetPath()}{relativeFilename}";
+#else
 			var uri1 = new Uri($"{currentLocation.GetPath()}{relativeFilename}");
 			File = uri1.PathAndQuery.ToString();
+#endif
 		}
 
 		public string GetFilenameRelativeToPath(Filename path)
@@ -374,6 +378,6 @@ namespace FilenameBuddy
 			}
 		}
 
-		#endregion //Methods
+#endregion //Methods
 	}
 }
