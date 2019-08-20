@@ -44,6 +44,8 @@ namespace FilenameBuddy
 
 		public bool HasFilename { get; private set; }
 
+		public static bool UseBackSlash { get; set; }
+
 		#endregion //Properties
 
 		#region Methods
@@ -52,11 +54,14 @@ namespace FilenameBuddy
 		{
 			if (!string.IsNullOrEmpty(initialString))
 			{
-#if !WINDOWS
-				return initialString.Replace('\\', '/');
-#else
-				return initialString.Replace('/', '\\');
-#endif
+				if (!UseBackSlash)
+				{
+					return initialString.Replace('\\', '/');
+				}
+				else
+				{
+					return initialString.Replace('/', '\\');
+				}
 			}
 			else
 			{
@@ -84,7 +89,10 @@ namespace FilenameBuddy
 		static public void SetCurrentDirectory()
 		{
 #if WINDOWS
+			UseBackSlash = true;
 			ProgramLocation = Directory.GetCurrentDirectory() + @"\";
+#else
+			UseBackSlash = false;
 #endif
 		}
 
@@ -108,11 +116,14 @@ namespace FilenameBuddy
 					break;
 				}
 
-#if ANDROID || __IOS__
-				progBuilder.AppendFormat(@"{0}/", pathinfo[i]);
-#else
-				progBuilder.AppendFormat(@"{0}\", pathinfo[i]);
-#endif
+				if (!UseBackSlash)
+				{
+					progBuilder.AppendFormat(@"{0}/", pathinfo[i]);
+				}
+				else
+				{
+					progBuilder.AppendFormat(@"{0}\", pathinfo[i]);
+				}
 			}
 
 			ProgramLocation = progBuilder.ToString();
@@ -158,11 +169,16 @@ namespace FilenameBuddy
 			//take the program location and append the filename to the end
 			StringBuilder fileBuilder = new StringBuilder();
 			fileBuilder.Append(ProgramLocation);
-#if ANDROID || __IOS__
-			fileBuilder.Append(@"Content/");
-#else
-			fileBuilder.Append(@"Content\");
-#endif
+
+			if (!UseBackSlash)
+			{
+				fileBuilder.Append(@"Content/");
+			}
+			else
+			{
+				fileBuilder.Append(@"Content\");
+			}
+
 			fileBuilder.Append(relFilename);
 			File = fileBuilder.ToString();
 			HasFilename = true;
@@ -183,11 +199,14 @@ namespace FilenameBuddy
 				//put the path back together
 				for (int i = 0; i < pathinfo.Length - 1; i++)
 				{
-#if ANDROID || __IOS__
-					totalPath.AppendFormat(@"{0}/", pathinfo[i]);
-#else
-					totalPath.AppendFormat(@"{0}\", pathinfo[i]);
-#endif
+					if (!UseBackSlash)
+					{
+						totalPath.AppendFormat(@"{0}/", pathinfo[i]);
+					}
+					else
+					{
+						totalPath.AppendFormat(@"{0}\", pathinfo[i]);
+					}
 				}
 			}
 
@@ -227,11 +246,14 @@ namespace FilenameBuddy
 			{
 				if (!String.IsNullOrEmpty(pathinfo[contentFolderIndex]))
 				{
-#if ANDROID || __IOS__
-					relativePath.AppendFormat(@"{0}/", pathinfo[contentFolderIndex]);
-#else
-					relativePath.AppendFormat(@"{0}\", pathinfo[contentFolderIndex]);
-#endif
+					if (!UseBackSlash)
+					{
+						relativePath.AppendFormat(@"{0}/", pathinfo[contentFolderIndex]);
+					}
+					else
+					{
+						relativePath.AppendFormat(@"{0}\", pathinfo[contentFolderIndex]);
+					}
 
 				}
 				contentFolderIndex++;
@@ -294,12 +316,15 @@ namespace FilenameBuddy
 
 		public void SetFilenameRelativeToPath(Filename currentLocation, string relativeFilename)
 		{
-#if ANDROID
-			File = $"{currentLocation.GetPath()}{relativeFilename}";
-#else
-			var uri1 = new Uri($"{currentLocation.GetPath()}{relativeFilename}");
-			File = uri1.PathAndQuery.ToString();
-#endif
+			if (!UseBackSlash)
+			{
+				File = $"{currentLocation.GetPath()}{relativeFilename}";
+			}
+			else
+			{
+				var uri1 = new Uri($"{currentLocation.GetPath()}{relativeFilename}");
+				File = uri1.PathAndQuery.ToString();
+			}
 		}
 
 		public string GetFilenameRelativeToPath(Filename path)
@@ -370,14 +395,17 @@ namespace FilenameBuddy
 			}
 			else
 			{
-#if ANDROID || __IOS__
-				return $@"{Filename.ProgramLocation}Content/{folder}";
-#else
-				return $@"{Filename.ProgramLocation}Content\{folder}";
-#endif
+				if (!UseBackSlash)
+				{
+					return $@"{Filename.ProgramLocation}Content/{folder}";
+				}
+				else
+				{
+					return $@"{Filename.ProgramLocation}Content\{folder}";
+				}
 			}
 		}
 
-#endregion //Methods
+		#endregion //Methods
 	}
 }
