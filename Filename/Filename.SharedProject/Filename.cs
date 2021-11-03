@@ -269,7 +269,22 @@ namespace FilenameBuddy
 		/// <returns>Get the filename with no path info</returns>
 		public string GetFile()
 		{
+#if !BRIDGE
 			return Path.GetFileName(_filename);
+#else
+			if (!String.IsNullOrEmpty(_filename))
+			{
+				//tokenize teh string
+				string[] pathinfo = _filename.Split(new Char[] { '/', '\\' });
+
+				//return the last item
+				return ((pathinfo.Length > 0) ? pathinfo[pathinfo.Length - 1] : "");
+			}
+			else
+			{
+				return string.Empty;
+			}
+#endif
 		}
 
 		/// <summary>
@@ -278,7 +293,23 @@ namespace FilenameBuddy
 		/// <returns>file extension (no '.')</returns>
 		public string GetFileExt()
 		{
+#if !BRIDGE
 			return Path.GetExtension(_filename);
+#else
+			if (!String.IsNullOrEmpty(_filename))
+			{
+				//tokenize teh string
+				string[] pathinfo = _filename.Split(new Char[] { '.' });
+
+				//rare there enough items in the filename?
+				if (pathinfo.Length >= 2)
+				{
+					return ((pathinfo.Length > 0) ? $".{pathinfo[pathinfo.Length - 1]}" : "");
+				}
+			}
+
+			return string.Empty;
+#endif
 		}
 
 		/// <summary>
@@ -288,7 +319,28 @@ namespace FilenameBuddy
 		/// <returns>the filename with no path info or extension</returns>
 		public string GetFileNoExt()
 		{
+#if !BRIDGE
 			return Path.GetFileNameWithoutExtension(_filename);
+#else
+			var filename = GetFile();
+			if (!String.IsNullOrEmpty(filename))
+			{
+				//tokenize teh string
+				string[] pathinfo = filename.Split(new Char[] { '.' });
+
+				//return the second to last item
+				if (pathinfo.Length > 1)
+				{
+					return pathinfo[pathinfo.Length - 2];
+				}
+				else if (pathinfo.Length == 1)
+				{
+					return pathinfo[0];
+				}
+			}
+			
+			return string.Empty;
+#endif
 		}
 
 		/// <summary>
@@ -316,6 +368,7 @@ namespace FilenameBuddy
 
 		public void SetFilenameRelativeToPath(Filename currentLocation, string relativeFilename)
 		{
+#if !BRIDGE
 			if (!UseBackSlash)
 			{
 				File = $"{currentLocation.GetPath()}{relativeFilename}";
@@ -325,14 +378,21 @@ namespace FilenameBuddy
 				var uri1 = new Uri($"{currentLocation.GetPath()}{relativeFilename}");
 				File = uri1.PathAndQuery.ToString();
 			}
+#else
+			throw new NotSupportedException();
+#endif
 		}
 
 		public string GetFilenameRelativeToPath(Filename path)
 		{
+#if !BRIDGE
 			var uri1 = new Uri(path.File);
 			var uri2 = new Uri(File);
 			var result = uri1.MakeRelativeUri(uri2).ToString();
 			return ReplaceSlashes(result);
+#else
+			throw new NotSupportedException();
+#endif
 		}
 
 		/// <summary>
@@ -371,9 +431,13 @@ namespace FilenameBuddy
 		/// <returns></returns>
 		public static IEnumerable<Filename> AllContentFiles(string folder)
 		{
+#if !BRIDGE
 			string filter = GetFilterLocation(folder);
 			var entries = Directory.GetFileSystemEntries(filter, "*", SearchOption.AllDirectories);
 			return entries.Select(x => new Filename() { File = x });
+#else
+			throw new NotSupportedException();
+#endif
 		}
 
 		/// <summary>
@@ -382,9 +446,13 @@ namespace FilenameBuddy
 		/// <returns></returns>
 		public static IEnumerable<Filename> ContentFilesOfType(string folder, string extension)
 		{
+#if !BRIDGE
 			string filter = GetFilterLocation(folder);
 			var entries = Directory.GetFileSystemEntries(filter, "*", SearchOption.AllDirectories);
 			return entries.Select(x => new Filename() { File = x }).Where(x => x.GetFileExt() == extension);
+#else
+			throw new NotSupportedException();
+#endif
 		}
 
 		private static string GetFilterLocation(string folder)
@@ -406,6 +474,6 @@ namespace FilenameBuddy
 			}
 		}
 
-		#endregion //Methods
+#endregion //Methods
 	}
 }
