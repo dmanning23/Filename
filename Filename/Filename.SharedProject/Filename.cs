@@ -395,6 +395,11 @@ namespace FilenameBuddy
 #endif
 		}
 
+		public void ChangeExtension(string extension)
+		{
+			_filename = $"{GetPathFileNoExt()}.{extension}";
+		}
+
 		/// <summary>
 		/// override the ToString function to get the whole path + filename
 		/// </summary>

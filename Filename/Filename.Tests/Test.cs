@@ -366,5 +366,14 @@ namespace FilenameBuddyTests
 			var expectedResult = $@"{Filename.ProgramLocation}Content\test1\test2.txt";
 			targetFilename.File.ShouldBe(expectedResult);
 		}
+
+		[Test]
+		public void ChangeExtension()
+		{
+			var originalFilename = new Filename { File = @"C:\test1\test.xml" };
+			originalFilename.ChangeExtension("json");
+
+			originalFilename.File.ShouldBe(@"C:\test1\test.json");
+		}
 	}
 }
