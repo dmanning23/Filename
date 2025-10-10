@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <PackageId>FilenameBuddy</PackageId>
+    <Version>5.0.0</Version>
+    <Title>FilenameBuddy</Title>
+    <Authors>dmanning23</Authors>
+    <description>A simple filename helper class for content files</description>
+    <PackageProjectUrl>https://github.com/dmanning23/Filename</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/dmanning23/Filename</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>monogame</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
